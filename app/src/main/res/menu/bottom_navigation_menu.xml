@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/categories_page"
+        android:enabled="true"
+        android:title="@string/categories"
+        android:icon="@drawable/ic_categories"/>
+    <item
+        android:id="@+id/favorites_page"
+        android:enabled="true"
+        android:title="@string/favorites"
+        android:icon="@drawable/ic_fav_product"/>
+
+</menu>
