@@ -15,7 +15,7 @@ import uz.fayyoz.a1shop.ui.products.category.adapter.ProductAdapter
 import uz.fayyoz.a1shop.ui.products.favorites.vm.FavoritesVM
 import uz.fayyoz.a1shop.utill.ViewModelFactory
 
-class FavoritesFragment : BaseFragment<FavoritesFragmentBinding>(R.layout.favorites_fragment) {
+class FavoritesFragment : BaseFragment<FavoritesFragmentBinding>(R.layout.category_fragment) {
 
     private val favoritesVM by viewModels<FavoritesVM> { ViewModelFactory() }
 

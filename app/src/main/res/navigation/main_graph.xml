@@ -8,14 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="uz.fayyoz.a1shop.ui.main.MainFragment"
-        android:label="MainFragment">
-        <action
-            android:id="@+id/action_mainFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
-    </fragment>
+        android:label="MainFragment"/>
     <fragment
         android:id="@+id/loginFragment"
         android:name="uz.fayyoz.a1shop.ui.login.LoginFragment"
@@ -30,7 +23,7 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="uz.fayyoz.a1shop.ui.signUp.SignUpFragment"
-        android:label="SignUpFragment" >
+        android:label="SignUpFragment">
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -38,9 +31,9 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="uz.fayyoz.a1shop.ui.products.favorites.FavoritesFragment"
-        android:label="FavoritesFragment" />
+        android:label="FavoritesFragment"/>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="uz.fayyoz.a1shop.ui.products.category.CategoryFragment"
-        android:label="CategoryFragment" />
+        android:label="CategoryFragment"/>
 </navigation>

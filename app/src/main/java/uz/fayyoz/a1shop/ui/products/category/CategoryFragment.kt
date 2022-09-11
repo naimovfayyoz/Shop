@@ -39,6 +39,9 @@ class CategoryFragment() : BaseFragment<CategoryFragmentBinding>(R.layout.catego
                 val result = it ?: return@collect
                 binding.apply {
                     swipeRefreshLayout.isRefreshing = result is Resource.Loading
+                    progressBar.isVisible =
+                        result is Resource.Loading || result.data.isNullOrEmpty()
+
                     recyclerView.isVisible = !result.data.isNullOrEmpty()
                     textViewError.isVisible = result.error != null && result.data.isNullOrEmpty()
                     buttonRetry.isVisible = result.error != null && result.data.isNullOrEmpty()

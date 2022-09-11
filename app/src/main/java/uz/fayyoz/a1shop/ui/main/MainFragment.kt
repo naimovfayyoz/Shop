@@ -33,17 +33,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(R.layout.main_fragment) {
         setUpTabLayout()
 
         //setWithNav...
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            val fragment = when (item.itemId) {
-                R.id.categories_page -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_categoryFragment)
-                }
-                R.id.favorites_page -> findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
 
-                else -> throw IllegalArgumentException("Unexpected itemId")
-            }
-            true
-        }
 
     }
 
