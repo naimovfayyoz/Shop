@@ -1,4 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/allProductsFragment"
+        android:enabled="true"
+        android:title="All"
+        android:icon="@drawable/ic_all_products"/>
     <item
         android:id="@+id/mainFragment"
         android:enabled="true"
@@ -11,3 +17,5 @@
         android:icon="@drawable/ic_fav_product"/>
 
 </menu>
+
+

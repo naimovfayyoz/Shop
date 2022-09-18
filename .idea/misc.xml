@@ -15,6 +15,9 @@
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/drawable/ic_baseline_apps_24.xml" value="0.143" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/drawable/ic_favorite_24.xml" value="0.252" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1395" />
+        <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/drawable/tab_indicator_default.xml" value="0.204" />
+        <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/drawable/tab_indicator_selected.xml" value="0.1" />
+        <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/drawable/tab_selector.xml" value="0.204" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/activity_main.xml" value="0.28229166666666666" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/all_products_fragment.xml" value="0.2786458333333333" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/auth_activity.xml" value="0.18958333333333333" />
@@ -23,7 +26,10 @@
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/item_product.xml" value="0.5" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/login_fragment.xml" value="0.18" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/main_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/product_details_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/product_image_pager.xml" value="0.1" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/register_fragment.xml" value="0.24298282362798493" />
+        <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/layout/tab_selector.xml" value="0.2786458333333333" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.33" />
         <entry key="..\:/Users/fayyo/AndroidStudioProjects/1Shop/app/src/main/res/xml/provider_paths.xml" value="0.18854166666666666" />
       </map>
@@ -34,5 +40,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2786458333333333" />
+      </ProjectState>
+    </option>
   </component>
 </project>

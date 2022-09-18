@@ -5,15 +5,21 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.fayyoz.a1shop.R
 import uz.fayyoz.a1shop.databinding.CategoryFragmentBinding
+import uz.fayyoz.a1shop.model.Products
 import uz.fayyoz.a1shop.ui.BaseFragment
-import uz.fayyoz.a1shop.ui.products.category.adapter.ProductAdapter
+import uz.fayyoz.a1shop.ui.main.MainFragment
+import uz.fayyoz.a1shop.ui.main.MainFragmentDirections
+import uz.fayyoz.a1shop.ui.products.adapter.ProductAdapter
 import uz.fayyoz.a1shop.ui.products.category.vm.CategoryVM
+import uz.fayyoz.a1shop.ui.products.listener.OnProductClickListener
 import uz.fayyoz.a1shop.utill.Resource
 import uz.fayyoz.a1shop.utill.ViewModelFactory
+import uz.fayyoz.a1shop.utill.navigate
 
 class CategoryFragment() : BaseFragment<CategoryFragmentBinding>(R.layout.category_fragment) {
 
@@ -21,17 +27,41 @@ class CategoryFragment() : BaseFragment<CategoryFragmentBinding>(R.layout.catego
         CategoryFragmentBinding.bind(view)
 
     private val productVM by viewModels<CategoryVM> { ViewModelFactory() }
-    private val productsAdapter: ProductAdapter = ProductAdapter(onItemClick = { product ->
-
-    },
-        onBookmarkClick = { article ->
-            productVM.onFavoriteClick(article)
-        })
+    private val productsAdapter: ProductAdapter = ProductAdapter()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpListeners()
+        subscribeObservers()
+        setUpRv()
+    }
+
+    private fun setUpListeners() {
+        productsAdapter.onProductClickListener(object : OnProductClickListener {
+            override fun onFavoriteClick(product: Products) {
+                productVM.onFavoriteClick(product)
+            }
+
+            override fun onProductClick(product: Products) {
+                val action =
+                    MainFragmentDirections.actionMainFragmentToProductsDetailsFragment(product)
+                navigate(R.id.mainFragment, action)
+            }
+
+        })
+    }
+
+    private fun setUpRv() {
+        binding.recyclerView.apply {
+            layoutManager =
+                GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
+            adapter = productsAdapter
+        }
+    }
+
+    override fun subscribeObservers() {
         val position = arguments?.getInt(POSITION_ARG)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
@@ -53,19 +83,9 @@ class CategoryFragment() : BaseFragment<CategoryFragmentBinding>(R.layout.catego
                 productsAdapter.submitList(it.data)
             }
         }
-        setUpRv()
-    }
-
-    private fun setUpRv() {
-        binding.recyclerView.apply {
-            layoutManager =
-                GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
-            adapter = productsAdapter
-        }
     }
 
     companion object {
-
         var POSITION_ARG = "position_arg"
 
         @JvmStatic

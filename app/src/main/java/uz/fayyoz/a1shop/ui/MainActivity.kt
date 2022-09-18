@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         userPref.accessToken.asLiveData().observe(this)
         {
             setupNavigation(it.isNull())
-            setupWithNavController(findViewById<BottomNavigationView>(R.id.bottom_navigation),
-                navController)
+
+            setupWithNavController(findViewById<BottomNavigationView>(R.id.bottom_navigation), navController)
 
         }
     }
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             navGraph.setStartDestination(R.id.loginFragment)
 
         } else {
-            navGraph.setStartDestination(R.id.mainFragment)
+            navGraph.setStartDestination(R.id.allProductsFragment)
         }
         navController.graph = navGraph
     }

@@ -8,7 +8,16 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="uz.fayyoz.a1shop.ui.main.MainFragment"
-        android:label="MainFragment"/>
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_productsDetailsFragment"
+            app:destination="@id/productsDetailsFragment">
+            <argument
+                android:name="product"
+                app:argType="uz.fayyoz.a1shop.model.Products" />
+        </action>
+
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="uz.fayyoz.a1shop.ui.login.LoginFragment"
@@ -31,9 +40,33 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="uz.fayyoz.a1shop.ui.products.favorites.FavoritesFragment"
-        android:label="FavoritesFragment"/>
+        android:label="FavoritesFragment">
+        <action
+            android:id="@+id/action_favoritesFragment_to_productsDetailsFragment"
+            app:destination="@id/productsDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="uz.fayyoz.a1shop.ui.products.category.CategoryFragment"
-        android:label="CategoryFragment"/>
+        android:label="CategoryFragment">
+        <action
+            android:id="@+id/action_categoryFragment_to_productsDetailsFragment"
+            app:destination="@id/productsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allProductsFragment"
+        android:name="uz.fayyoz.a1shop.ui.products.allProducts.AllProductsFragment"
+        android:label="AllProductsFragment">
+        <action
+            android:id="@+id/action_allProductsFragment_to_productsDetailsFragment"
+            app:destination="@id/productsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productsDetailsFragment"
+        android:name="uz.fayyoz.a1shop.ui.products.product_details.ProductsDetailsFragment"
+        android:label="ProductsDetailsFragment">
+        <argument
+            android:name="product"
+            app:argType="uz.fayyoz.a1shop.model.Products" />
+    </fragment>
 </navigation>

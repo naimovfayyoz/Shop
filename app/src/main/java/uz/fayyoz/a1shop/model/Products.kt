@@ -1,10 +1,13 @@
 package uz.fayyoz.a1shop.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "products")
+@Parcelize
 data class Products(
     val description: String,
     @PrimaryKey
@@ -16,4 +19,4 @@ data class Products(
     val price: Double,
     val title: String,
     val isFavorite: Boolean = false,
-)
+) : Parcelable

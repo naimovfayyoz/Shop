@@ -11,7 +11,7 @@ interface ProductsRepository {
 
     fun getByCategory(category: Int): Flow<Resource<List<Products>>>
 
-    // fun getAllProducts(): Flow<Resource<List<Products>>>
+  fun getAllProducts(): Flow<Resource<List<Products>>>
 
     suspend fun updateProduct(products: Products)
 
