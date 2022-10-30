@@ -20,9 +20,11 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProducts(products: List<Products>)
 
+    // TODO IMPLEMENT IT
     @Query("UPDATE products SET isFavorite = 0")
     suspend fun resetAllFavorites()
 
+    // TODO IMPLEMENT IT
     @Update
     suspend fun updateProduct(products: Products)
 

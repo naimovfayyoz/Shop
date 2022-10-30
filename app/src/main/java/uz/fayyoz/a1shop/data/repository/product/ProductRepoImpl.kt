@@ -1,7 +1,6 @@
 package uz.fayyoz.a1shop.data.repository.product
 
 
-
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import uz.fayyoz.a1shop.data.local.db.ProductDao
@@ -10,6 +9,7 @@ import uz.fayyoz.a1shop.model.Products
 import uz.fayyoz.a1shop.network.ShopService
 import uz.fayyoz.a1shop.utill.BaseNetworkRepo
 import uz.fayyoz.a1shop.utill.networkBoundResource
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.days
 
@@ -22,7 +22,7 @@ class ProductRepoImpl(
 
     companion object {
         @ExperimentalTime
-        private val DATA_EXPIRY_IN_MILLIS = 1.days.inMilliseconds.toLong()
+        private val DATA_EXPIRY_IN_MILLIS = 1.days.toDouble(DurationUnit.MILLISECONDS).toLong()
     }
 
     @OptIn(ExperimentalTime::class)
@@ -88,9 +88,6 @@ class ProductRepoImpl(
     }
 
     override fun getAllFavProducts(): Flow<List<Products>> = productDao.getAllFavProducts()
-
-
-
 
 
     //    override fun createUser() {

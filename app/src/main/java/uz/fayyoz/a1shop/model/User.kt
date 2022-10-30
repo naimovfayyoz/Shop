@@ -22,8 +22,10 @@ data class User(
     val name: String,
     @SerializedName("role")
     @Expose
-    val role: String,
+    var role: Boolean = false,
     @SerializedName("avatar")
     @Expose
     val avatar: String,
+    @Expose
+    var money: Double = 1000.0,
 )

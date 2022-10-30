@@ -2,8 +2,9 @@ package uz.fayyoz.a1shop.di
 
 import androidx.room.Room
 import kotlinx.serialization.ExperimentalSerializationApi
-import uz.fayyoz.a1shop.data.local.db.ProductsDB
+import uz.fayyoz.a1shop.data.local.db.ShopDB
 import uz.fayyoz.a1shop.data.local.db.ProductDao
+import uz.fayyoz.a1shop.data.local.db.UserDao
 import uz.fayyoz.a1shop.utill.App
 
 object  DatabaseModule {
@@ -11,8 +12,8 @@ object  DatabaseModule {
     private val database = provideDatabase()
 
     @OptIn(ExperimentalSerializationApi::class)
-    fun provideDatabase(): ProductsDB {
-        return Room.databaseBuilder(App.appInstance, ProductsDB::class.java, "uz.fayyoz.1shop_db")
+    fun provideDatabase(): ShopDB {
+        return Room.databaseBuilder(App.appInstance, ShopDB::class.java, "uz.fayyoz.1shop_db")
             .build()
     }
 
@@ -21,5 +22,9 @@ object  DatabaseModule {
         return database.productsDao()
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
+    fun provideUserDao(): UserDao {
+        return database.userDao()
+    }
 
 }

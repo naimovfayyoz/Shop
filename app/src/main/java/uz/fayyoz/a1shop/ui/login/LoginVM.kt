@@ -1,24 +1,26 @@
 package uz.fayyoz.a1shop.ui.login
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import uz.fayyoz.a1shop.di.RepositoryModule
-import uz.fayyoz.a1shop.domain.LoginUseCase
-import uz.fayyoz.a1shop.domain.SaveAccessTokenUseCase
+import retrofit2.Response
+import uz.fayyoz.a1shop.domain.login.*
 import uz.fayyoz.a1shop.model.Token
+import uz.fayyoz.a1shop.model.User
 import uz.fayyoz.a1shop.ui.BaseViewModel
-import uz.fayyoz.a1shop.utill.BaseNetworkRepo
 
 class LoginVM(
     private val loginUseCase: LoginUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
-) : BaseViewModel() {
+    private val getAccessTokenUseCase: GetAccessTokenUseCase,
+    private val clearTokenUseCase: ClearAccessTokenUseCase,
+    private val getUserDataUseCase: GetUserDataUseCase,
+
+    ) : BaseViewModel() {
     private val _loginToken: MutableLiveData<Token> = MutableLiveData()
-    val loginToken: LiveData<Token> get() = _loginToken
+    private val loginToken: LiveData<Token> get() = _loginToken
 
     suspend fun login(email: String, password: String): LiveData<Token> {
         viewModelScope.launch(exceptionHandler) {
@@ -30,7 +32,24 @@ class LoginVM(
         return loginToken
     }
 
-    suspend fun saveAccessTokens(accessToken: String) {
+    suspend fun saveAccessTokens( accessToken: String?) {
         saveAccessTokenUseCase.execute(accessToken)
+    }
+
+    suspend fun refreshToken(token: String?) {
+        clearTokenUseCase.execute()
+        saveAccessTokenUseCase.execute(token)
+    }
+
+    suspend fun clearAccessToken() {
+        clearTokenUseCase.execute()
+    }
+
+    fun getAccessTokens(): Flow<String?> {
+        return getAccessTokenUseCase.execute()
+    }
+
+    suspend fun getUserData(token: String): User {
+        return getUserDataUseCase.execute(token)
     }
 }

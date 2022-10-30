@@ -16,20 +16,22 @@ import uz.fayyoz.a1shop.utill.ListTypeConverter
 @Database(entities = [User::class, Products::class, Category::class], version = 1)
 @TypeConverters(ListTypeConverter::class)
 @kotlinx.serialization.ExperimentalSerializationApi
-abstract class ProductsDB : RoomDatabase() {
+abstract class ShopDB : RoomDatabase() {
 
     abstract fun productsDao(): ProductDao
 
+    abstract fun userDao(): UserDao
+
     companion object {
         @Volatile
-        private var instance: ProductsDB? = null
+        private var instance: ShopDB? = null
 
         @OptIn(InternalCoroutinesApi::class)
-        fun getDatabaseInstance(context: Context): ProductsDB {
+        fun getDatabaseInstance(context: Context): ShopDB {
             synchronized(this) {
                 return instance ?: Room.databaseBuilder(
                     context,
-                    ProductsDB::class.java, "1shop_db"
+                    ShopDB::class.java, "1shop_db"
                 )
                     .fallbackToDestructiveMigration()
                     .build().also {

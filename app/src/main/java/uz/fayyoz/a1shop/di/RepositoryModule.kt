@@ -1,5 +1,6 @@
 package uz.fayyoz.a1shop.di
 
+import android.provider.ContactsContract
 import uz.fayyoz.a1shop.data.local.pref.ProductSyncPref
 import uz.fayyoz.a1shop.data.local.pref.UserPref
 import uz.fayyoz.a1shop.data.repository.login.LoginRepoImpl
@@ -19,11 +20,13 @@ object RepositoryModule {
     )
 
     fun bindLoginRepo(): LoginRepository = LoginRepoImpl(
-        RetrofitService.shopService,
-        UserPref(App.appInstance)
+        RetrofitService.loginService,
+        UserPref(App.appInstance),
+        DatabaseModule.provideUserDao()
     )
 
     fun bindSignUpRepo(): SignUpRepository = SignUpRepoImpl(
-        RetrofitService.shopService
+        RetrofitService.loginService,
+        DatabaseModule.provideUserDao()
     )
 }

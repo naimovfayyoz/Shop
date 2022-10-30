@@ -1,11 +1,22 @@
 package uz.fayyoz.a1shop.data.repository.login
 
+import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import uz.fayyoz.a1shop.model.Token
+import uz.fayyoz.a1shop.model.User
 
 interface LoginRepository {
 
     suspend fun login(email: String, password: String): Response<Token>
 
-    suspend fun saveAccessTokens(accessToken: String)
+    fun getAccessTokens(): Flow<String?>
+
+    suspend fun clearAccessToken()
+
+    suspend fun gett():Response<User>
+
+    suspend fun saveAccessToken(accessToken: String?)
+
+    suspend fun getUserData(token: String): User
 }

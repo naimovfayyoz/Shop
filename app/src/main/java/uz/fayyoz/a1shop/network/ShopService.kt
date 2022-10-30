@@ -13,31 +13,5 @@ interface ShopService {
     @GET("products")
     suspend fun getAllProducts(): List<Products>
 
-    @GET("categories/{categoryID}/products")
-    suspend fun getByCategory(@Path("categoryID") id: Int): List<Products>
 
-    @POST("auth/login")
-    @FormUrlEncoded
-    suspend fun login(
-        @Field("email") email: String,
-        @Field("password") password: String,
-    ): Response<Token>
-
-
-    @POST("users")
-    @FormUrlEncoded
-    suspend fun register(
-        @Field("name") name: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("avatar") avatar: String,
-    ): Response<User>
-
-
-//    @GET("categories/{categoryID}/products")
-//    suspend fun getBy(@Path("categdoryID") id: Int): Flow<PagingData<Products>>
-
-
-    //@GET("categories")
-//    suspend fun getByCategory()
 }

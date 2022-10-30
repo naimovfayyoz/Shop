@@ -29,7 +29,7 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(R.layout.login_fragment
             binding.progressBar.visible(true)
             val email = binding.emailEt.text.toString().trim()
             val password = binding.passwordEt.text.toString().trim()
-           checkToken(email, password)
+            checkToken(email, password)
         }
 
         binding.passwordEt.addTextChangedListener {
@@ -51,28 +51,14 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(R.layout.login_fragment
             loginVM.login(email, password).observe(viewLifecycleOwner) {
                 if (!it.access_token.isNull()) {
                     lifecycleScope.launchWhenStarted {
-                        loginVM.saveAccessTokens(it.access_token)
+                        loginVM.saveAccessTokens( it.access_token)
                     }
                 } else {
                     Toast.makeText(requireContext(), "invalid login", Toast.LENGTH_SHORT).show()
-
                 }
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //@Todo use in validation

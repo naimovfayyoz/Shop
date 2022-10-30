@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.fayyoz.a1shop.BuildConfig
+import uz.fayyoz.a1shop.network.LoginService
 import uz.fayyoz.a1shop.network.ShopService
 import java.util.concurrent.TimeUnit
 
@@ -26,6 +27,7 @@ object RetrofitService {
             chain.run {
                 proceed(request())
                     .newBuilder()
+//                    .addHeader("Authorization", "Bearer " +"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJzdWIiOjEsImlhdCI6MTY2NTM3MTgyMiwiZXhwIjoxNjY1Mzc1NDIyfQ.lIDoJCX2OZkK21Yoa-JcSAWS_Y8jZf0hthr1THofRE4")
                     .build()
             }
         }.build()
@@ -38,4 +40,6 @@ object RetrofitService {
             .build()
 
     val shopService: ShopService = retrofit.create(ShopService::class.java)
+    val loginService: LoginService = retrofit.create(LoginService::class.java)
+
 }
