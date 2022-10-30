@@ -50,8 +50,12 @@ class MainActivity : AppCompatActivity() {
         loginVM.getAccessTokens().asLiveData().observe(this) { token ->
             setupNavigation(token)
             lifecycleScope.launchWhenStarted {
+                loginVM.insertUser(token)
 
-                loginVM.getUserData(token!!)
+                if (token != null) {
+                    setHeader(loginVM.getUserData(token))
+                }
+                //
             }
 
         }
@@ -138,7 +142,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.thirdItem -> {
                         lifecycleScope.launch {
-                            loginVM.clearAccessToken()
+                            loginVM.apply {
+                                clearAccessToken()
+                                deleteUser()
+                            }
                         }
                     }
                 }
@@ -157,9 +164,7 @@ class MainActivity : AppCompatActivity() {
 
             headerEmail.text = user.email
             headerMoney.text = user.money.toString() + "$"
-            Log.d("TAG", "setHeader: "+user.money)
-
-
+            Log.d("TAG", "setHeader: " + user.money)
         }
     }
 

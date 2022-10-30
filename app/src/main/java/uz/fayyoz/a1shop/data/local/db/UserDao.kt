@@ -10,12 +10,13 @@ import uz.fayyoz.a1shop.model.User
 @Dao
 interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: User)
-
     @Query("Select * from user")
     fun getUser(): User
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserData(user: User)
+
+    @Query("Delete from user")
+    suspend fun deleteUser()
+
 }

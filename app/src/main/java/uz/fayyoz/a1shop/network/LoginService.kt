@@ -25,10 +25,8 @@ interface LoginService {
         @Field("avatar") avatar: String,
     ): Response<User>
 
+
     @GET("auth/profile")
     suspend fun getUserData(@Header("Authorization") token: String): Response<User>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AbWFpbC5jb20iLCJzdWIiOjEsImlhdCI6MTY2NTQ5OTI1NywiZXhwIjoxNjY1NTAyODU3fQ.WlVviRAWigyJ7_ZiOQFiD5N2NT753uGnVq5G_g2sgQ4 ")
-    @GET("auth/profile")
-    suspend fun get(): Response<User>
 }

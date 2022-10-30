@@ -17,6 +17,8 @@ class LoginVM(
     private val getAccessTokenUseCase: GetAccessTokenUseCase,
     private val clearTokenUseCase: ClearAccessTokenUseCase,
     private val getUserDataUseCase: GetUserDataUseCase,
+    private val insertUserDataUseCase: InsertUserDataUseCase,
+    private val deleteUserUseCase: DeleteUserDataUseCase,
 
     ) : BaseViewModel() {
     private val _loginToken: MutableLiveData<Token> = MutableLiveData()
@@ -32,8 +34,16 @@ class LoginVM(
         return loginToken
     }
 
-    suspend fun saveAccessTokens( accessToken: String?) {
+    suspend fun deleteUser() {
+        deleteUserUseCase.execute()
+    }
+
+    suspend fun saveAccessTokens(accessToken: String?) {
         saveAccessTokenUseCase.execute(accessToken)
+    }
+
+    suspend fun insertUser(accessToken: String?) {
+        insertUserDataUseCase.execute(accessToken)
     }
 
     suspend fun refreshToken(token: String?) {

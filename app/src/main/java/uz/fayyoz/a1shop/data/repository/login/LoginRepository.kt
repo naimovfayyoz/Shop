@@ -14,7 +14,9 @@ interface LoginRepository {
 
     suspend fun clearAccessToken()
 
-    suspend fun gett():Response<User>
+    suspend fun insertUser(token: String?)
+
+    suspend fun deleteUser()
 
     suspend fun saveAccessToken(accessToken: String?)
 

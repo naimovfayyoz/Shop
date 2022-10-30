@@ -28,7 +28,9 @@ class ViewModelFactory : ViewModelProvider.Factory {
                 SaveAccessTokenUseCase(loginRepo),
                 GetAccessTokenUseCase(loginRepo),
                 ClearAccessTokenUseCase(loginRepo),
-                GetUserDataUseCase(loginRepo)) as T
+                GetUserDataUseCase(loginRepo),
+                InsertUserDataUseCase(loginRepo),
+                DeleteUserDataUseCase(loginRepo)) as T
         } else if (modelClass.isAssignableFrom(SignUpVM::class.java)) {
             SignUpVM(SignUpUseCase(signUpRepo)) as T
         } else {

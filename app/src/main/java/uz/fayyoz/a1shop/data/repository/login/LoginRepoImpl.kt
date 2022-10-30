@@ -1,16 +1,14 @@
 package uz.fayyoz.a1shop.data.repository.login
 
-import android.util.Log
-import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import uz.fayyoz.a1shop.data.local.db.UserDao
 import uz.fayyoz.a1shop.data.local.pref.UserPref
 import uz.fayyoz.a1shop.model.User
 import uz.fayyoz.a1shop.network.LoginService
+import uz.fayyoz.a1shop.utill.isNull
 
 class LoginRepoImpl(
     private val loginService: LoginService,
@@ -30,8 +28,13 @@ class LoginRepoImpl(
         preferences.clearToken()
     }
 
-    override suspend fun gett(): Response<User> {
-        return loginService.get()
+    override suspend fun insertUser(token: String?) {
+        if (!token.isNull())
+            userDao.insertUserData(loginService.getUserData("Bearer " + token).body()!!)
+    }
+
+    override suspend fun deleteUser() {
+        userDao.deleteUser()
     }
 
     override suspend fun saveAccessToken(accessToken: String?) {
@@ -46,14 +49,13 @@ class LoginRepoImpl(
                 userDao.insertUserData(loginService.getUserData("Bearer " + token).body()!!)
                 userDao.getUser()
             } else {
-                val refreshToken = loginService.login("john@mail.com", "changeme").body()
-                Log.d("TAG", "Bearer: " + refreshToken.toString())
+                val refreshToken =
+                    loginService.login(userDao.getUser().email, userDao.getUser().password).body()
                 userDao.insertUserData(loginService.getUserData("Bearer " + refreshToken!!.access_token)
                     .body()!!)
                 userDao.getUser()
             }
         }
-
 
     }
 
