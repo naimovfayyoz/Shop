@@ -8,16 +8,14 @@ import uz.fayyoz.a1shop.utill.Resource
 
 interface ProductsRepository {
 
-    // suspend fun getProducts()
+     fun getByCategory(category: Int): Flow<Resource<List<Products>>>
 
-    fun getByCategory(category: Int): Flow<Resource<List<Products>>>
-
-    fun getAllProducts(): Flow<Resource<List<Products>>>
+     fun getAllProducts(): Flow<Resource<List<Products>>>
 
     suspend fun updateProduct(products: Products)
 
     suspend fun resetAllFavProducts()
 
-    fun getAllFavProducts(): Flow<List<Products>>
+     fun getAllFavProducts(): Flow<List<Products>>
 
 }

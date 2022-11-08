@@ -5,7 +5,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import uz.fayyoz.a1shop.data.local.db.ShopDB
 import uz.fayyoz.a1shop.data.local.db.ProductDao
 import uz.fayyoz.a1shop.data.local.db.UserDao
-import uz.fayyoz.a1shop.utill.App
+import uz.fayyoz.a1shop.App
 
 object  DatabaseModule {
 

@@ -1,4 +1,4 @@
-package uz.fayyoz.a1shop.utill
+package uz.fayyoz.a1shop
 
 import android.app.Application
 
