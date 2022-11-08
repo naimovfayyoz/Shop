@@ -70,6 +70,7 @@ class AllProductsFragment :
 
     override fun subscribeObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            allProductsVM.allProducts
             allProductsVM.allProducts.collect {
                 val result = it ?: return@collect
                 binding.apply {

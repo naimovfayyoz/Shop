@@ -1,8 +1,11 @@
 package uz.fayyoz.a1shop.data.repository.product
 
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 import uz.fayyoz.a1shop.data.local.db.ProductDao
 import uz.fayyoz.a1shop.data.local.pref.ProductSyncPref
 import uz.fayyoz.a1shop.model.Products
@@ -47,7 +50,7 @@ class ProductRepoImpl(
             val lastSynced = productSyncPref.lastSyncedTime.first()
             lastSynced == -1L || it.isNullOrEmpty() || isExpired(lastSynced)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     @OptIn(ExperimentalTime::class)
     override fun getByCategory(category: Int) = networkBoundResource(
@@ -71,7 +74,7 @@ class ProductRepoImpl(
             val lastSynced = productSyncPref.lastSyncedTime.first()
             lastSynced == -1L || it.isNullOrEmpty() || isExpired(lastSynced)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     @ExperimentalTime
     private fun isExpired(lastSynced: Long): Boolean {
@@ -79,24 +82,15 @@ class ProductRepoImpl(
         return (currentTime - lastSynced) >= DATA_EXPIRY_IN_MILLIS
     }
 
-    override suspend fun updateProduct(product: Products) {
+    override suspend fun updateProduct(product: Products) = withContext(Dispatchers.IO) {
         productDao.updateProduct(product)
     }
 
-    override suspend fun resetAllFavProducts() {
+    override suspend fun resetAllFavProducts() = withContext(Dispatchers.IO) {
         productDao.resetAllFavorites()
     }
 
-    override fun getAllFavProducts(): Flow<List<Products>> = productDao.getAllFavProducts()
-
-
-    //    override fun createUser() {
-//        coroutineScope.launch {
-//            shopService.login(
-//                "john@mail.com",
-//                "changeme",
-//            )
-//        }
-//    }
+    override fun getAllFavProducts(): Flow<List<Products>> =
+        productDao.getAllFavProducts().flowOn(Dispatchers.IO)
 
 }

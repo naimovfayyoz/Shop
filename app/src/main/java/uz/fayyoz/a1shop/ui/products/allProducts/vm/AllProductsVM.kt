@@ -11,7 +11,7 @@ import uz.fayyoz.a1shop.ui.BaseViewModel
 class AllProductsVM(private val repository: ProductsRepository) : BaseViewModel() {
 
 
-    val allProducts = repository.getAllProducts()
+    val allProducts =   repository.getAllProducts()
         .stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     fun onFavoriteClick(product: Products) {
