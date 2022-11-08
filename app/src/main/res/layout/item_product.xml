@@ -17,6 +17,7 @@
             android:id="@+id/item_image"
             android:layout_width="176dp"
             android:layout_height="129dp"
+            android:transitionName="image"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

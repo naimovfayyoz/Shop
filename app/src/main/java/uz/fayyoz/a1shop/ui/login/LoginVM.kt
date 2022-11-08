@@ -46,11 +46,6 @@ class LoginVM(
         insertUserDataUseCase.execute(accessToken)
     }
 
-    suspend fun refreshToken(token: String?) {
-        clearTokenUseCase.execute()
-        saveAccessTokenUseCase.execute(token)
-    }
-
     suspend fun clearAccessToken() {
         clearTokenUseCase.execute()
     }
@@ -59,7 +54,7 @@ class LoginVM(
         return getAccessTokenUseCase.execute()
     }
 
-    suspend fun getUserData(token: String): User {
-        return getUserDataUseCase.execute(token)
+    suspend fun getUserData(): User {
+        return getUserDataUseCase.execute()
     }
 }

@@ -14,11 +14,12 @@ interface LoginRepository {
 
     suspend fun clearAccessToken()
 
-    suspend fun insertUser(token: String?)
 
     suspend fun deleteUser()
 
     suspend fun saveAccessToken(accessToken: String?)
 
-    suspend fun getUserData(token: String): User
+    suspend fun getUserData(): User
+
+    suspend fun insertUser(token: String?)
 }

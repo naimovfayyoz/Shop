@@ -6,6 +6,6 @@ import uz.fayyoz.a1shop.model.User
 
 class GetUserDataUseCase(private val repository: LoginRepository) {
 
-    suspend fun execute(token:String): User = repository.getUserData(token)
+    suspend fun execute(): User = repository.getUserData()
 
 }

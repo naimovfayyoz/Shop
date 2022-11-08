@@ -2,6 +2,7 @@ package uz.fayyoz.a1shop.ui.products.category
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -44,7 +45,7 @@ class CategoryFragment() : BaseFragment<CategoryFragmentBinding>(R.layout.catego
                 productVM.onFavoriteClick(product)
             }
 
-            override fun onProductClick(product: Products) {
+            override fun onProductClick(product: Products,imageView: ImageView) {
                 val action =
                     MainFragmentDirections.actionMainFragmentToProductsDetailsFragment(product)
                 navigate(R.id.mainFragment, action)

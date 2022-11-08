@@ -7,5 +7,5 @@ interface OnProductClickListener {
 
     fun onFavoriteClick(product: Products)
 
-    fun onProductClick(product: Products)
+    fun onProductClick(product: Products,imageView: ImageView)
 }

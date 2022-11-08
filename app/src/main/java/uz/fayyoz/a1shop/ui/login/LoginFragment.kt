@@ -1,6 +1,7 @@
 package uz.fayyoz.a1shop.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
@@ -51,9 +52,13 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(R.layout.login_fragment
             loginVM.login(email, password).observe(viewLifecycleOwner) {
                 if (!it.access_token.isNull()) {
                     lifecycleScope.launchWhenStarted {
-                        loginVM.saveAccessTokens( it.access_token)
+                        loginVM.insertUser(it.access_token)
+                        loginVM.saveAccessTokens(it.access_token)
+                        Log.d("232", "checkToken: "+it.access_token)
+
                     }
                 } else {
+                    binding.progressBar.visible(false)
                     Toast.makeText(requireContext(), "invalid login", Toast.LENGTH_SHORT).show()
                 }
             }

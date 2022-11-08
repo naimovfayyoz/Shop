@@ -1,5 +1,6 @@
 package uz.fayyoz.a1shop.data.repository.login
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +18,9 @@ class LoginRepoImpl(
 ) : LoginRepository {
 
 
-    override suspend fun login(email: String, password: String) =
+    override suspend fun login(email: String, password: String) = withContext(Dispatchers.IO) {
         loginService.login(email, password)
+    }
 
     override fun getAccessTokens(): Flow<String?> {
         return preferences.accessToken
@@ -28,35 +30,23 @@ class LoginRepoImpl(
         preferences.clearToken()
     }
 
-    override suspend fun insertUser(token: String?) {
-        if (!token.isNull())
-            userDao.insertUserData(loginService.getUserData("Bearer " + token).body()!!)
+    override suspend fun insertUser(token: String?) = withContext(Dispatchers.IO) {
+        userDao.insertUserData(loginService.getUserData("Bearer " + token).body()!!)
+
     }
 
     override suspend fun deleteUser() {
         userDao.deleteUser()
     }
 
-    override suspend fun saveAccessToken(accessToken: String?) {
+    override suspend fun saveAccessToken(accessToken: String?) = withContext(Dispatchers.IO) {
         if (accessToken != null) {
             preferences.saveAccessTokens(accessToken)
         }
     }
 
-    override suspend fun getUserData(token: String): User = withContext(Dispatchers.IO) {
-        coroutineScope {
-            return@coroutineScope if (loginService.getUserData(token).isSuccessful) {
-                userDao.insertUserData(loginService.getUserData("Bearer " + token).body()!!)
-                userDao.getUser()
-            } else {
-                val refreshToken =
-                    loginService.login(userDao.getUser().email, userDao.getUser().password).body()
-                userDao.insertUserData(loginService.getUserData("Bearer " + refreshToken!!.access_token)
-                    .body()!!)
-                userDao.getUser()
-            }
-        }
-
+    override suspend fun getUserData(): User = withContext(Dispatchers.IO) {
+        userDao.getUser()
     }
-
 }
+

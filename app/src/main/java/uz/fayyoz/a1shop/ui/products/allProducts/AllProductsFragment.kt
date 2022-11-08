@@ -1,11 +1,17 @@
 package uz.fayyoz.a1shop.ui.products.allProducts
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.ActivityNavigator
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.fayyoz.a1shop.R
@@ -45,11 +51,16 @@ class AllProductsFragment :
                 allProductsVM.onFavoriteClick(product)
             }
 
-            override fun onProductClick(product: Products) {
+            override fun onProductClick(product: Products,imageView: ImageView) {
+
+                val extras=FragmentNavigatorExtras(
+                    imageView to "image"
+                )
                 val action =
                     AllProductsFragmentDirections.actionAllProductsFragmentToProductsDetailsFragment(
                         product)
-                navigate(R.id.allProductsFragment, action)
+                findNavController().navigate(action,extras)
+                //navigate(R.id.allProductsFragment, action)
             }
 
         })

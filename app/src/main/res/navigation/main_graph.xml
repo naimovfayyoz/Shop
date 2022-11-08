@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_favoritesFragment_to_productsDetailsFragment"
             app:destination="@id/productsDetailsFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_addCreditCardFragment"
+            app:destination="@id/addCreditCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -52,6 +55,9 @@
         <action
             android:id="@+id/action_categoryFragment_to_productsDetailsFragment"
             app:destination="@id/productsDetailsFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_addCreditCardFragment"
+            app:destination="@id/addCreditCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/allProductsFragment"
@@ -60,6 +66,9 @@
         <action
             android:id="@+id/action_allProductsFragment_to_productsDetailsFragment"
             app:destination="@id/productsDetailsFragment" />
+        <action
+            android:id="@+id/action_allProductsFragment_to_addCreditCardFragment"
+            app:destination="@id/addCreditCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/productsDetailsFragment"
@@ -69,4 +78,8 @@
             android:name="product"
             app:argType="uz.fayyoz.a1shop.model.Products" />
     </fragment>
+    <fragment
+        android:id="@+id/addCreditCardFragment"
+        android:name="uz.fayyoz.a1shop.ui.AddCreditCardFragment"
+        android:label="AddCreditCardFragment" />
 </navigation>

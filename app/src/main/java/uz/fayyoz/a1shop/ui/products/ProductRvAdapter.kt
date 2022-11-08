@@ -3,11 +3,16 @@ package uz.fayyoz.a1shop.ui.products.adapter
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.fayyoz.a1shop.model.Products
 import uz.fayyoz.a1shop.R
 import uz.fayyoz.a1shop.databinding.ItemProductBinding
+import uz.fayyoz.a1shop.ui.products.allProducts.AllProductsFragmentDirections
 import uz.fayyoz.a1shop.ui.products.listener.OnProductClickListener
 import uz.fayyoz.a1shop.utill.getDrawable
 import uz.fayyoz.a1shop.utill.inflate
@@ -47,6 +52,7 @@ class ProductAdapter() : ListAdapter<Products, ProductAdapter.ProductVH>(Product
         ) {
             binding.apply {
                 itemImage.setImageRemote(product.images[0], errImg)
+                itemImage.transitionName="image"
                 itemTitle.text = product.title ?: ""
                 itemPrice.text = (product.price.toInt().toString() + " $") ?: ""
 
@@ -60,7 +66,8 @@ class ProductAdapter() : ListAdapter<Products, ProductAdapter.ProductVH>(Product
                 root.setOnClickListener {
                     val position = bindingAdapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        productClickListener?.onProductClick(product)
+                        productClickListener?.onProductClick(product, itemImage)
+
                     }
                 }
                 imgFav.setOnClickListener {

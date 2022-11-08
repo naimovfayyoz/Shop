@@ -2,6 +2,8 @@ package uz.fayyoz.a1shop.ui.products.favorites
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -57,7 +59,7 @@ class FavoritesFragment : BaseFragment<FavoritesFragmentBinding>(R.layout.catego
                 favoritesVM.onFavoriteClick(product)
             }
 
-            override fun onProductClick(product: Products) {
+            override fun onProductClick(product: Products,imageView: ImageView) {
                 val action =
                     FavoritesFragmentDirections.actionFavoritesFragmentToProductsDetailsFragment(
                         product)
