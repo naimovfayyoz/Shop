@@ -71,6 +71,16 @@ fun ImageView.setImageRemote(imgUrl: String, errorImg: Drawable?) {
         .into(this)
 }
 
+fun ImageView.setImageRemoteCircled(imgUrl: String, errorImg: Drawable?) {
+    Glide.with(context)
+        .load(imgUrl)
+        .error(errorImg)
+        .circleCrop()
+        .diskCacheStrategy(DiskCacheStrategy.DATA)
+        .into(this)
+}
+
+
 fun Any?.isNull() = this == null
 
 fun Number.formatMoney(): String {

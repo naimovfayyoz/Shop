@@ -11,6 +11,9 @@ interface ProductDao {
     @Query("SELECT * FROM products WHERE isFavorite == 1")
     fun getAllFavProducts(): Flow<List<Products>>
 
+    @Query("SELECT * FROM products WHERE isOnCart == 1")
+    fun getAllProductsOnCart(): Flow<List<Products>>
+
     @Query("SELECT * FROM products WHERE category == :categoryID")
     fun getProductsByCategory(categoryID: Int): Flow<List<Products>>
 

@@ -1,9 +1,7 @@
 package uz.fayyoz.a1shop.ui
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -11,24 +9,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isGone
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
-import uz.fayyoz.a1shop.R
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
+import uz.fayyoz.a1shop.R
 import uz.fayyoz.a1shop.databinding.ActivityMainBinding
-import uz.fayyoz.a1shop.model.Token
 import uz.fayyoz.a1shop.model.User
 import uz.fayyoz.a1shop.ui.login.LoginVM
-import uz.fayyoz.a1shop.utill.ViewModelFactory
-import uz.fayyoz.a1shop.utill.isNull
-import uz.fayyoz.a1shop.utill.log
+import uz.fayyoz.a1shop.utill.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,25 +37,20 @@ class MainActivity : AppCompatActivity() {
     private val loginVM by viewModels<LoginVM> { ViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-         installSplashScreen()
+        installSplashScreen()
 
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNavigation.isGone = true
 
+
         loginVM.getAccessTokens().asLiveData().observe(this) { token ->
             setupNavigation(token)
             lifecycleScope.launchWhenStarted {
                 setHeader(loginVM.getUserData(), token)
-            }
-        }
-    }
 
-    private suspend fun refreshToken() {
-        loginVM.login("john@mail.com", "changeme").observe(this@MainActivity) { token ->
-            lifecycleScope.launchWhenStarted {
-                loginVM.saveAccessTokens(token.access_token)
+
             }
         }
     }
@@ -78,9 +67,12 @@ class MainActivity : AppCompatActivity() {
 
         } else {
             navGraph.setStartDestination(R.id.allProductsFragment)
-            setupWithNavController(findViewById<BottomNavigationView>(R.id.bottom_navigation),
+            setupWithNavController(binding.bottomNavigation,
                 navController)
-
+            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.allProductsFragment)
+            badge.isVisible = true
+// An icon only badge will be displayed unless a number is set:
+            badge.number = 99
             setupNavDrawer()
             binding.bottomNavigation.isGone = false
 
@@ -135,14 +127,17 @@ class MainActivity : AppCompatActivity() {
     private fun setHeader(user: User, token: String?) {
         lifecycleScope.launchWhenStarted {
             navHeader = binding.navView.getHeaderView(0)
-            var headerImage = navHeader.findViewById<ImageView>(R.id.imageView)
+            navHeader.setBackgroundColor(R.drawable.background_nav_header)
+            val headerImage = navHeader.findViewById<ImageView>(R.id.imageView)
             val headerEmail = navHeader.findViewById<TextView>(R.id.email_tv)
             val headerMoney = navHeader.findViewById<TextView>(R.id.money_tv)
 
             if (!token.isNull()) {
+                val errImg = getDrawable(this@MainActivity, R.drawable.error_image)
+
+                headerImage.setImageRemoteCircled(user.avatar, errImg)
                 headerEmail.text = user.email
                 headerMoney.text = user.money.toString() + "$"
-                Log.d("TAG", "setHeader: " + user.money)
             }
         }
     }

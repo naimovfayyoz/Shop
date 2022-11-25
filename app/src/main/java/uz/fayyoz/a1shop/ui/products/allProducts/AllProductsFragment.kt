@@ -1,15 +1,11 @@
 package uz.fayyoz.a1shop.ui.products.allProducts
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.ActivityNavigator
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,13 +14,11 @@ import uz.fayyoz.a1shop.R
 import uz.fayyoz.a1shop.databinding.AllProductsFragmentBinding
 import uz.fayyoz.a1shop.model.Products
 import uz.fayyoz.a1shop.ui.BaseFragment
-import uz.fayyoz.a1shop.ui.main.MainFragmentDirections
 import uz.fayyoz.a1shop.ui.products.allProducts.vm.AllProductsVM
 import uz.fayyoz.a1shop.ui.products.adapter.ProductAdapter
 import uz.fayyoz.a1shop.ui.products.listener.OnProductClickListener
 import uz.fayyoz.a1shop.utill.Resource
 import uz.fayyoz.a1shop.utill.ViewModelFactory
-import uz.fayyoz.a1shop.utill.navigate
 
 class AllProductsFragment :
     BaseFragment<AllProductsFragmentBinding>(R.layout.all_products_fragment) {
@@ -48,7 +42,9 @@ class AllProductsFragment :
     private fun setUpListeners() {
         productsAdapter.onProductClickListener(object : OnProductClickListener {
             override fun onFavoriteClick(product: Products) {
+
                 allProductsVM.onFavoriteClick(product)
+
             }
 
             override fun onProductClick(product: Products,imageView: ImageView) {

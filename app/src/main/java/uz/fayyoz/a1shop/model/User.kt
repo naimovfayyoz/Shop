@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import retrofit2.http.Field
 
 @Entity(tableName = "user")
 data class User(
@@ -22,10 +21,10 @@ data class User(
     val name: String,
     @SerializedName("role")
     @Expose
-    var role: Boolean = false,
+    var role: Boolean = true,
     @SerializedName("avatar")
     @Expose
     val avatar: String,
     @Expose
-    var money: Double = 1000.0,
+    var money: Double,
 )

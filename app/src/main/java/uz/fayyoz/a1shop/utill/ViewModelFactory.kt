@@ -9,6 +9,7 @@ import uz.fayyoz.a1shop.ui.products.category.vm.CategoryVM
 import uz.fayyoz.a1shop.ui.login.LoginVM
 import uz.fayyoz.a1shop.ui.products.allProducts.vm.AllProductsVM
 import uz.fayyoz.a1shop.ui.products.favorites.vm.FavoritesVM
+import uz.fayyoz.a1shop.ui.products.product_details.vm.ProductsDetailsVM
 import uz.fayyoz.a1shop.ui.signUp.SignUpVM
 
 class ViewModelFactory : ViewModelProvider.Factory {
@@ -33,7 +34,11 @@ class ViewModelFactory : ViewModelProvider.Factory {
                 DeleteUserDataUseCase(loginRepo)) as T
         } else if (modelClass.isAssignableFrom(SignUpVM::class.java)) {
             SignUpVM(SignUpUseCase(signUpRepo)) as T
-        } else {
+        }
+        else if (modelClass.isAssignableFrom(ProductsDetailsVM::class.java)) {
+            ProductsDetailsVM(productRepo) as T
+
+        }else {
             throw IllegalArgumentException("Unknown ViewModel Class")
         }
     }

@@ -1,18 +1,14 @@
 package uz.fayyoz.a1shop.ui.products.adapter
 
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.fayyoz.a1shop.model.Products
 import uz.fayyoz.a1shop.R
 import uz.fayyoz.a1shop.databinding.ItemProductBinding
-import uz.fayyoz.a1shop.ui.products.allProducts.AllProductsFragmentDirections
 import uz.fayyoz.a1shop.ui.products.listener.OnProductClickListener
 import uz.fayyoz.a1shop.utill.getDrawable
 import uz.fayyoz.a1shop.utill.inflate
@@ -39,7 +35,6 @@ class ProductAdapter() : ListAdapter<Products, ProductAdapter.ProductVH>(Product
         }
     }
 
-
     inner class ProductVH(
         view: View,
     ) : RecyclerView.ViewHolder(view) {
@@ -52,7 +47,7 @@ class ProductAdapter() : ListAdapter<Products, ProductAdapter.ProductVH>(Product
         ) {
             binding.apply {
                 itemImage.setImageRemote(product.images[0], errImg)
-                itemImage.transitionName="image"
+                itemImage.transitionName = "image"
                 itemTitle.text = product.title ?: ""
                 itemPrice.text = (product.price.toInt().toString() + " $") ?: ""
 
@@ -73,7 +68,27 @@ class ProductAdapter() : ListAdapter<Products, ProductAdapter.ProductVH>(Product
                 imgFav.setOnClickListener {
                     val position = bindingAdapterPosition
                     if (position != RecyclerView.NO_POSITION) {
+                        imgFav.animate().apply {
+                            setListener(object : Animator.AnimatorListener {
+                                override fun onAnimationStart(animation: Animator) {
+                                    scaleX(2f).scaleY(2f).duration = 1000
+
+                                }
+
+                                override fun onAnimationEnd(animation: Animator) {
+                                    imgFav.animate().scaleX(1f).scaleY(1f)
+                                }
+
+                                override fun onAnimationCancel(animation: Animator) {
+                                }
+
+                                override fun onAnimationRepeat(animation: Animator) {
+                                }
+
+                            })
+                        }
                         productClickListener?.onFavoriteClick(product)
+
                     }
                 }
             }

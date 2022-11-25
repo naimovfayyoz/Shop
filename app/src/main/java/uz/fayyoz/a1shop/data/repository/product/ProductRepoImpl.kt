@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import uz.fayyoz.a1shop.data.local.db.ProductDao
+import uz.fayyoz.a1shop.data.local.db.UserDao
 import uz.fayyoz.a1shop.data.local.pref.ProductSyncPref
 import uz.fayyoz.a1shop.model.Products
 import uz.fayyoz.a1shop.network.ShopService
-import uz.fayyoz.a1shop.utill.BaseNetworkRepo
 import uz.fayyoz.a1shop.utill.networkBoundResource
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
@@ -20,8 +20,8 @@ class ProductRepoImpl(
     private val shopService: ShopService,
     private val productDao: ProductDao,
     private val productSyncPref: ProductSyncPref,
-) : ProductsRepository,
-    BaseNetworkRepo() {
+    private val userDao: UserDao
+) : ProductsRepository{
 
     companion object {
         @ExperimentalTime
@@ -92,5 +92,8 @@ class ProductRepoImpl(
 
     override fun getAllFavProducts(): Flow<List<Products>> =
         productDao.getAllFavProducts().flowOn(Dispatchers.IO)
+
+    override fun getAllProductsOnCart(): Flow<List<Products>> =
+        productDao.getAllProductsOnCart().flowOn(Dispatchers.IO)
 
 }

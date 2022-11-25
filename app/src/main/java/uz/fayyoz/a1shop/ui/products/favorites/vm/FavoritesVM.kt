@@ -15,10 +15,10 @@ class FavoritesVM(private val repository: ProductsRepository) : BaseViewModel() 
         .stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     fun onFavoriteClick(product: Products) {
-        val currentlyBookmarked = product.isFavorite
-        val updatedArticle = product.copy(isFavorite = !currentlyBookmarked)
+        val currentlyFavorite = product.isFavorite
+        val updatedFav = product.copy(isFavorite = !currentlyFavorite)
         viewModelScope.launch {
-            repository.updateProduct(updatedArticle)
+            repository.updateProduct(updatedFav)
         }
     }
 

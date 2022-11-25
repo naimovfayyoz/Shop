@@ -3,18 +3,14 @@
     <item
         android:id="@+id/allProductsFragment"
         android:enabled="true"
-        android:title="All"
-        android:icon="@drawable/ic_all_products"/>
-    <item
-        android:id="@+id/mainFragment"
-        android:enabled="true"
-        android:title="@string/categories"
-        android:icon="@drawable/ic_categories"/>
+        android:icon="@drawable/ic_all_products"
+        android:title="@string/cart" />
+
     <item
         android:id="@+id/favoritesFragment"
         android:enabled="true"
-        android:title="@string/favorites"
-        android:icon="@drawable/ic_fav_product"/>
+        android:icon="@drawable/ic_fav_product"
+        android:title="@string/favorites" />
 
 </menu>
 

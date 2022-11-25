@@ -31,6 +31,7 @@ abstract class BaseFragment<T : ViewBinding>(@LayoutRes private val layout: Int)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //TODO MAKE IT USABLE
         //  subscribeObservers()
     }
 
@@ -41,7 +42,7 @@ abstract class BaseFragment<T : ViewBinding>(@LayoutRes private val layout: Int)
             event.getContentIfNotHandled()?.let { isNetworkAvailable->
                 if (isNetworkAvailable && isFirstNetworkCheck)
                     onNetworkAvailable()
-                else
+                else//TODO make a animation
                     onNetworkLost()
             }
         })

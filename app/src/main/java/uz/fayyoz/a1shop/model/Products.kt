@@ -19,4 +19,5 @@ data class Products(
     val price: Double,
     val title: String,
     val isFavorite: Boolean = false,
+    val isOnCart: Boolean = false,
 ) : Parcelable

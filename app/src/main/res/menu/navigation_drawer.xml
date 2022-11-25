@@ -8,5 +8,5 @@
         android:title="Second Item" />
     <item
         android:id="@+id/thirdItem"
-        android:title="Third Item" />
+        android:title="Log out" />
 </menu>

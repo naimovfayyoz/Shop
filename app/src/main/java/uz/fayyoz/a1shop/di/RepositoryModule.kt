@@ -15,8 +15,7 @@ object RepositoryModule {
     fun bindProductsRepo(): ProductsRepository = ProductRepoImpl(
         RetrofitService.shopService,
         DatabaseModule.provideProductsDao(),
-        ProductSyncPref(App.appInstance)
-    )
+        ProductSyncPref(App.appInstance),DatabaseModule.provideUserDao())
 
     fun bindLoginRepo(): LoginRepository = LoginRepoImpl(
         RetrofitService.loginService,
